@@ -67,7 +67,7 @@ extern void print_message(Message_t Message);
  * \pre socket déjà initialisé et structure remplie
  * \post 
 **/
-extern void send_message(Message_t *Message, int socket);
+extern int send_message(Message_t *Message, int socket);
 
 /**
  * \author Skylord65
@@ -79,6 +79,6 @@ extern void send_message(Message_t *Message, int socket);
  * \pre socket déjà initialisé
  * \post 
 **/
-extern void receive_message(Message_t *Message, int socket);
+extern int receive_message(Message_t *Message, int socket);
 
 #endif // __MESSAGE_H__
