@@ -12,7 +12,6 @@ MSG_OBJS = $(MSG_SRCS:.c=.o)
 
 SRV_EXEC = server
 CLI_EXEC = client
-MSG_EXEC = message
 
 .PHONY: all clean fclean re
 
@@ -22,9 +21,6 @@ $(SRV_EXEC): $(SRV_OBJS) $(MSG_OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ -lpthread
 
 $(CLI_EXEC): $(CLI_OBJS) $(MSG_OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ -lpthread
-
-$(MSG_EXEC): $(MSG_OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ -lpthread
 
 %.o: %.c

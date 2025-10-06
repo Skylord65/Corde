@@ -1,8 +1,12 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include "message.h"
+#include <stdio.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
 #include <sys/socket.h>
+#include <arpa/inet.h>
+#include <pthread.h>
+#include "message.h"
 
 /** 
  * \file message.c
@@ -23,21 +27,29 @@ void fill_message(Message_t *Message, char *message){
     strcpy(Message->Message, message);
 }
 
-void send_message(Message_t *Message, int socket){
-
-    // Envoi de la longueur du message
-    if (send(socket, Message, sizeof(Message_t), 0) == -1) {
+int send_message(Message_t *Message, int socket){
+    int len = htonl(Message->lg_message);
+    if (send(socket, &len, sizeof(len), 0) == -1) {
         perror("Erreur lors de l'envoi de la longueur du message.");
-        exit(EXIT_FAILURE);
+        return -1;
     }
+    if (send(socket, Message->Message, Message->lg_message, 0) == -1) {
+        perror("Erreur lors de l'envoi du message.");
+        return -1;
+    }
+    return 0;
 }
 
-void receive_message(Message_t *Message, int socket){
-    // Réception de la longueur du message
-    if (recv(socket, Message, sizeof(Message_t), 0) == -1) {
-        perror("Erreur lors de la réception de la longueur du message.");
-        exit(EXIT_FAILURE);
-    }
+int receive_message(Message_t *Message, int socket){
+    int len;
+    ssize_t n = recv(socket, &len, sizeof(len), MSG_WAITALL);
+    if (n <= 0) return -1;
+    Message->lg_message = ntohl(len);
+    if (Message->lg_message > LG_MAX) return -1;
+    n = recv(socket, Message->Message, Message->lg_message, MSG_WAITALL);
+    if (n <= 0) return -1;
+    Message->Message[Message->lg_message] = '\0';
+    return 0;
 }
 
 void print_message(Message_t Message){
