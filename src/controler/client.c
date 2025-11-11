@@ -59,6 +59,8 @@ int main(int argc, char const *argv[]){
     // Séparation du client et du server //
     //-----------------------------------//
 
+    // TODO: emmeteur = client; recepteur = server; renommer ce fichier main, créer client et server.
+
     pid_t pid = fork();
 
     switch(pid) {
