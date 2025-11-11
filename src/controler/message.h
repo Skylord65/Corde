@@ -34,6 +34,7 @@ typedef struct User_s {
     int socket;
     char pseudo[50];
 } User_t;
+
 /**
  * \author Skylord65
  * \date 03/05/2025
