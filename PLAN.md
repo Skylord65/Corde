@@ -24,89 +24,89 @@ Le protocole de communication sera basé sur des sockets TCP/IP. Il devra être 
 
 ## Liste des tâches
 
-| Nom          | Libellé                                                                                             | Responsable |
-|--------------|-----------------------------------------------------------------------------------------------------|-------------|
-|              | **Phase 0 : Préparation**                                                                           | [Manolo-dev](https://github.com/Manolo-dev) |
-| Spec         | Analyse des spécifications et conception de l'architecture (ECB)                                    |             |
-| Proto        | Définition du protocole de communication (formats, commandes, sécurité, échanges de clés)           |             |
-| Planif       | Planification et répartition des tâches / choix des technologies (GTK, Qt, TUI)                     |             |
-|              | **Phase 1 : Communication de base**                                                                 | [Rhexephon](https://github.com/Rhexephon)   |
-| Sockets      | Mise en place de la gestion des sockets (client/server)                                             |             |
-| ChiffBase    | Intégration d'un chiffrement de base (RSA, certificats auto-signés)                                 |             |
-| ClientCLI    | Développement d’un client en ligne de commande pour tests et débogage                               |             |
-| MsgSimple    | Implémentation d’une gestion simple des messages (envoi/réception)                                  |             |
-| Serveurs     | Création et gestion de serveurs                                                                     |             |
-|              | **Phase 2 : Gestion du stockage des données**                                                       | [Manolo-dev](https://github.com/Manolo-dev) |
-| DBStruct     | Choix et mise en place de la base données (SQLite, PostgreSQL, etc.)                                |             |
-| DBSchema     | Création des schémas de base de données (utilisateurs, messages, salons, messages)                  |             |
-| DBQueries    | Requêtes de base pour la récupération et la manipulation des données                                |             |
-|              | **Phase 3 : Gestion des utilisateurs et des salons**                                                | [Skylord65](https://github.com/Skylord65)   |
-| Utilisateurs | Gestion des utilisateurs (inscription, création de compte, connexion, rôles)                        |             |
-| Salons       | Gestion et catégorisation des salons (textuels, vocaux, vidéos)                                     |             |
-| Contacts     | Gestion des connaissances (ajout, suppression, blocage, statuts : amis, collègue, etc.)             |             |
-| Status       | Statuts personnalisés (en ligne, occupé, invisible, etc.)                                           |             |
-| Profil       | Profil utilisateur avec avatar (pdp simple) et bio                                                  |             |
-| Invits       | Gestion des invitations et des liens d’invitation                                                   |             |
-| DM           | Messages privés                                                                                     |             |
-|              | **Phase 4 : Gestion avancée des messages**                                                          | [Rhexephon](https://github.com/Rhexephon)   |
-| MsgMod       | Envoi et modification de messages                                                                   |             |
-| MsgDel       | Suppression de messages (pour soi ou pour tous)                                                     |             |
-| Reacts       | Réactions aux messages avec emojis                                                                  |             |
-| Pinned       | Messages épinglés                                                                                   |             |
-| Fichiers     | Envoi de fichiers et images                                                                         |             |
-| MediaAff     | Lecture et affichage des vidéos, GIFs et images intégrées                                           |             |
-| History      | Historique des messages et notifications                                                            |             |
-| MsgSearch    | Recherche de messages (avancée, éventuellement regex)                                               |             |
-|              | **Phase 5 : Sécurisation et intégrité des données**                                                 | [Rhexephon](https://github.com/Rhexephon)   |
-| ChiffRob     | Mise en place d’un chiffrement robuste (RSA, Diffie-Hellman)                                        |             |
-| AuthSec      | Sécurisation de l’authentification (multi-facteurs, tokens)                                         |             |
-| MsgSig       | Validation de l’intégrité des messages (signatures numériques)                                      |             |
-| Report       | Signalement d’utilisateurs ou de messages                                                           |             |
-| AuditLog     | Journaux d’audit pour les serveurs                                                                  |             |
-|              | **Phase 6 : Interaction et automatisation**                                                         | [Manolo-dev](https://github.com/Manolo-dev) |
-| MiniLang     | Développement d’un mini-langage de commandes (admin & modération, intégrant le système de mentions) |             |
-| Markdown     | Implémentation d’un compilateur markdown pour affichage enrichi                                     |             |
-| Notifs       | Gestion des notifications (messages, mentions, alertes)                                             |             |
-| Logging      | Système de logging et débogage                                                                      |             |
-| RolesAdv     | Gestion des rôles et permissions avancées                                                           |             |
-| Threads      | Citations et fils de discussion (threads)                                                           |             |
-| Polls        | Sondages et formulaires via bots                                                                    |             |
-| API          | API                                                                                                 |             |
-| Bots         | Bots et automatisation                                                                              |             |
-| Plugins      | Plugins et intégrations tierces (YouTube, Twitch, Spotify, etc.)                                    |             |
-|              | **Phase 7 : Communication en temps réel**                                                           | [Skylord65](https://github.com/Skylord65)   |
-| AVCall       | Appels vocaux et vidéo en groupe                                                                    |             |
-| ScreenShare  | Partage d’écran                                                                                     |             |
-| AudioOpt     | Suppression du bruit et réglage du gain automatique                                                 |             |
-| TempSal      | Salons temporaires                                                                                  |             |
-| ServerSearch | Recherche de serveurs publics                                                                       |             |
-| Fav          | Système de favoris ou raccourcis vers des messages/serveurs                                         |             |
-|              | **Phase 8 : Interfaces utilisateur**                                                                | [Manolo-dev](https://github.com/Manolo-dev) |
-| GTK          | Conception de l’interface graphique avec GTK                                                        |             |
-| Qt           | Portage/adaptation pour Qt (Windows)                                                                |             |
-| TUI          | Développement d’une interface en TUI (optionnelle)                                                  |             |
-| UIAdmin      | Intégration des contrôles d’administration et modération                                            |             |
-| ElecApp      | Electron-app pour une version web et mobile                                                         |             |
-|              | **Phase 9 : Finalisation et déploiement**                                                           | [Skylord65](https://github.com/Skylord65)   |
-| Tests        | Mise en place des tests unitaires et d’intégration                                                  |             |
-| Docs         | Rédaction de la documentation technique et utilisateur                                              |             |
-| Deploy       | Déploiement du serveur central et configuration                                                     |             |
-| Monitor      | Système de monitoring et d’alertes                                                                  |             |
-|              | **Phase SEC continue : Sécurité**                                                                   | [Skylord65](https://github.com/Skylord65)   |
-| Audit        | Audit de sécurité initial & revue des meilleures pratiques (open source)                            |             |
-| SecAudit     | Audit de sécurité continu et revue du code                                                          |             |
-| PatchSec     | Système de gestion et déploiement des mises à jour de sécurité                                      |             |
-| 2FA          | Authentification à deux facteurs (2FA)                                                              |             |
-| SecTests     | Tests de sécurité approfondis (pentests, vulnérabilités)                                            |             |
-|              | **Phase TEST : Tests**                                                                              |             |
-| UnitSockets  | Tests unitaires pour la gestion des sockets                                                         |             |
-| UnitChiff    | Tests unitaires pour le chiffrement                                                                 |             |
-| UnitDB       | Tests unitaires pour la base de données                                                             |             |
-| UnitReq      | Tests unitaires pour les requêtes                                                                   |             |
-| UnitLang     | Tests unitaires pour le mini-langage                                                                |             |
-| ManGTK       | Tests manuels de l’interface GTK                                                                    |             |
-| ManQt        | Tests manuels de l’interface Qt                                                                     |             |
-| ManTUI       | Tests manuels de l'interface TUI                                                                    |             |
+| Nom          | Libellé                                                                                             |
+|--------------|-----------------------------------------------------------------------------------------------------|
+|              | **Phase 0 : Préparation**                                                                           |
+| Spec         | Analyse des spécifications et conception de l'architecture (ECB)                                    |
+| Proto        | Définition du protocole de communication (formats, commandes, sécurité, échanges de clés)           |
+| Planif       | Planification et répartition des tâches / choix des technologies (GTK, Qt, TUI)                     |
+|              | **Phase 1 : Communication de base**                                                                 |
+| Sockets      | Mise en place de la gestion des sockets (client/server)                                             |
+| ChiffBase    | Intégration d'un chiffrement de base (RSA, certificats auto-signés)                                 |
+| ClientCLI    | Développement d’un client en ligne de commande pour tests et débogage                               |
+| MsgSimple    | Implémentation d’une gestion simple des messages (envoi/réception)                                  |
+| Serveurs     | Création et gestion de serveurs                                                                     |
+|              | **Phase 2 : Gestion du stockage des données**                                                       |
+| DBStruct     | Choix et mise en place de la base données (SQLite, PostgreSQL, etc.)                                |
+| DBSchema     | Création des schémas de base de données (utilisateurs, messages, salons, messages)                  |
+| DBQueries    | Requêtes de base pour la récupération et la manipulation des données                                |
+|              | **Phase 3 : Gestion des utilisateurs et des salons**                                                |
+| Utilisateurs | Gestion des utilisateurs (inscription, création de compte, connexion, rôles)                        |
+| Salons       | Gestion et catégorisation des salons (textuels, vocaux, vidéos)                                     |
+| Contacts     | Gestion des connaissances (ajout, suppression, blocage, statuts : amis, collègue, etc.)             |
+| Status       | Statuts personnalisés (en ligne, occupé, invisible, etc.)                                           |
+| Profil       | Profil utilisateur avec avatar (pdp simple) et bio                                                  |
+| Invits       | Gestion des invitations et des liens d’invitation                                                   |
+| DM           | Messages privés                                                                                     |
+|              | **Phase 4 : Gestion avancée des messages**                                                          |
+| MsgMod       | Envoi et modification de messages                                                                   |
+| MsgDel       | Suppression de messages (pour soi ou pour tous)                                                     |
+| Reacts       | Réactions aux messages avec emojis                                                                  |
+| Pinned       | Messages épinglés                                                                                   |
+| Fichiers     | Envoi de fichiers et images                                                                         |
+| MediaAff     | Lecture et affichage des vidéos, GIFs et images intégrées                                           |
+| History      | Historique des messages et notifications                                                            |
+| MsgSearch    | Recherche de messages (avancée, éventuellement regex)                                               |
+|              | **Phase 5 : Sécurisation et intégrité des données**                                                 |
+| ChiffRob     | Mise en place d’un chiffrement robuste (RSA, Diffie-Hellman)                                        |
+| AuthSec      | Sécurisation de l’authentification (multi-facteurs, tokens)                                         |
+| MsgSig       | Validation de l’intégrité des messages (signatures numériques)                                      |
+| Report       | Signalement d’utilisateurs ou de messages                                                           |
+| AuditLog     | Journaux d’audit pour les serveurs                                                                  |
+|              | **Phase 6 : Interaction et automatisation**                                                         |
+| MiniLang     | Développement d’un mini-langage de commandes (admin & modération, intégrant le système de mentions) |
+| Markdown     | Implémentation d’un compilateur markdown pour affichage enrichi                                     |
+| Notifs       | Gestion des notifications (messages, mentions, alertes)                                             |
+| Logging      | Système de logging et débogage                                                                      |
+| RolesAdv     | Gestion des rôles et permissions avancées                                                           |
+| Threads      | Citations et fils de discussion (threads)                                                           |
+| Polls        | Sondages et formulaires via bots                                                                    |
+| API          | API                                                                                                 |
+| Bots         | Bots et automatisation                                                                              |
+| Plugins      | Plugins et intégrations tierces (YouTube, Twitch, Spotify, etc.)                                    |
+|              | **Phase 7 : Communication en temps réel**                                                           |
+| AVCall       | Appels vocaux et vidéo en groupe                                                                    |
+| ScreenShare  | Partage d’écran                                                                                     |
+| AudioOpt     | Suppression du bruit et réglage du gain automatique                                                 |
+| TempSal      | Salons temporaires                                                                                  |
+| ServerSearch | Recherche de serveurs publics                                                                       |
+| Fav          | Système de favoris ou raccourcis vers des messages/serveurs                                         |
+|              | **Phase 8 : Interfaces utilisateur**                                                                |
+| GTK          | Conception de l’interface graphique avec GTK                                                        |
+| Qt           | Portage/adaptation pour Qt (Windows)                                                                |
+| TUI          | Développement d’une interface en TUI (optionnelle)                                                  |
+| UIAdmin      | Intégration des contrôles d’administration et modération                                            |
+| ElecApp      | Electron-app pour une version web et mobile                                                         |
+|              | **Phase 9 : Finalisation et déploiement**                                                           |
+| Tests        | Mise en place des tests unitaires et d’intégration                                                  |
+| Docs         | Rédaction de la documentation technique et utilisateur                                              |
+| Deploy       | Déploiement du serveur central et configuration                                                     |
+| Monitor      | Système de monitoring et d’alertes                                                                  |
+|              | **Phase SEC continue : Sécurité**                                                                   |
+| Audit        | Audit de sécurité initial & revue des meilleures pratiques (open source)                            |
+| SecAudit     | Audit de sécurité continu et revue du code                                                          |
+| PatchSec     | Système de gestion et déploiement des mises à jour de sécurité                                      |
+| 2FA          | Authentification à deux facteurs (2FA)                                                              |
+| SecTests     | Tests de sécurité approfondis (pentests, vulnérabilités)                                            |
+|              | **Phase TEST : Tests**                                                                              |
+| UnitSockets  | Tests unitaires pour la gestion des sockets                                                         |
+| UnitChiff    | Tests unitaires pour le chiffrement                                                                 |
+| UnitDB       | Tests unitaires pour la base de données                                                             |
+| UnitReq      | Tests unitaires pour les requêtes                                                                   |
+| UnitLang     | Tests unitaires pour le mini-langage                                                                |
+| ManGTK       | Tests manuels de l’interface GTK                                                                    |
+| ManQt        | Tests manuels de l’interface Qt                                                                     |
+| ManTUI       | Tests manuels de l'interface TUI                                                                    |
 
 
 ### Dépendances des tâches
@@ -298,6 +298,8 @@ TEST_6 o--o P8
 TEST_7 o--o P8
 ```
 ## Contributeurs responsables
+
+Personne n'est responsable ici, vive l'anarchie !
 
 ## Format des identifiants
 
