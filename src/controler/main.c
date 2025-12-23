@@ -12,17 +12,23 @@ int main(int argc, char const *argv[])
     // Déclaration des variables //
     //---------------------------//
     pid_t pid_server, pid_client, pid_main_page;
+    int pipe_server[2], pipe_client[2];
 
     //------------------------------//
     // Initialisation des variables //
     //------------------------------//
     pid_server=fork(), pid_client=fork(), pid_main_page=fork();
 
+    //-------------------------------------//
+    // Création des tubes de communication //
+    //-------------------------------------//
+
+    pipe(pipe_client);
+    pipe(pipe_server);
+
     //---------------------------------//
     // Repartition des différents fork //
     //---------------------------------//
-
-    // TODO : création des tubes et gestion des communications inter-processus.
 
     // fork mainpage
     switch (pid_main_page)
@@ -48,15 +54,15 @@ int main(int argc, char const *argv[])
         exit(1);
         break;
     case 0:
-        // compléter avec les paramètres du serveur
-        execlp("./server", "127.0.0.1", "5555");
+        // argv0 : nom programme, argv1 : ip, argv2 : port, argv3 : tube serveur, argv4 : tube client 
+        execlp("./server", "server", "127.0.0.1", "5555", pipe_server, pipe_client);
         exit(1);
         break;
     default:
         break;
     }
 
-    // fork client
+    // fork client (client en terminal)
     switch (pid_client)
     {
     case -1:
@@ -64,8 +70,8 @@ int main(int argc, char const *argv[])
         exit(1);
         break;
     case 0:
-        // compléter avec les paramètres du client
-        execlp("./client", "127.0.0.1", "5555");
+        // // argv0 : nom programme, argv1 : ip, argv2 : port, argv3 : tube client, argv4 : tube serveur
+        execlp("./client", "client", "127.0.0.1", "5555", pipe_client, pipe_server);
         exit(1);
         break;
     default:

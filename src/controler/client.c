@@ -9,13 +9,54 @@
 
 /** 
  * \file client.c
- * \brief Gestion du client
+ * \brief Gestion du client terminal
  * \author Skylord65
  * \date 03/05/2025
  **/
 
 #define LG_MAX 1000
 
+void fils(int sid, Message_t message) {
+    do {
+                /* code du buffer pour entrer le message (temporairement le message envoyé sera "message") */
+
+                char buffer[LG_MAX];
+                char c;
+                int i = 0;
+                printf("> ");
+                scanf("%c", &c);
+                while(c != '\n' && i<LG_MAX-1) {
+                    buffer[i] = c;
+                    printf("> ");
+                    scanf("%c", &c);
+                    i++;
+                }
+                buffer[i] = '\0';
+                /* ajouter une commande "/exit" pour quitter le buffer */
+
+                /* transmition des messages au serveur */
+                fill_message(&message, buffer);
+
+                send_message(&message, sid);
+
+                printf("() :");
+                print_message(message);
+                
+            } while (1);
+}
+
+void pere(int sid, Message_t message_recu) {
+    do {
+        receive_message(&message_recu, sid);
+        if (message_recu.lg_message == 0) {
+            printf("Le serveur a fermé la connexion.\n");
+            close(sid);
+            exit(EXIT_FAILURE);
+        }
+        printf("(server) :");
+        print_message(message_recu);
+    } while (1);
+}
 
 int main(int argc, char const *argv[]) {
     //---------------------------//
@@ -33,10 +74,13 @@ int main(int argc, char const *argv[]) {
     dst_serv_addr.sin_family = AF_INET;
     dst_serv_addr.sin_port = htons(atoi(argv[2]));
 
-    if(argc!= 3) {
+    if(argc!= 5) {
         perror("Problème sur le nombre de paramètres.");
         return EXIT_FAILURE;
     }
+
+    int pipe_client = argv[3];
+    int pipe_server = argv[4];
 
     sid = socket(AF_INET, SOCK_STREAM, 0);
     
@@ -68,43 +112,12 @@ int main(int argc, char const *argv[]) {
             perror("Erreur de la création de fils receptioniste des messages.");
             return EXIT_FAILURE;
         case 0:
-            do {
-                /** code du buffer pour entrer le message (temporairement le message envoyé sera "message") */
-
-                char buffer[LG_MAX];
-                char c;
-                int i = 0;
-                scanf("%c", &c);
-                while(c != '\n' && i<LG_MAX-1) {
-                    buffer[i] = c;
-                    scanf("%c", &c);
-                    i++;
-                }
-                buffer[i] = '\0';
-                /* ajouter une commande "/exit" pour quitter le buffer */
-
-                fill_message(&message, buffer);
-
-                send_message(&message, sid);
-
-                printf("(client) :");
-                print_message(message);
-                
-            } while (1);
+            fils(sid, message);
             break;
         default:
             break;
         }
-    do {
-        receive_message(&message_recu, sid);
-        if (message_recu.lg_message == 0) {
-            printf("Le serveur a fermé la connexion.\n");
-            close(sid);
-            exit(EXIT_FAILURE);
-        }
-        printf("(server) :");
-        print_message(message_recu);
-    } while (1);
+    pere(sid, message_recu);
     
     close(sid);
 

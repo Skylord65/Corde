@@ -74,7 +74,7 @@ void* handle_client(void* arg) {
     return NULL;
 }
 
-int main(void) {
+int main(int argc, char const *argv[]) {
     memset(user_list, 0, sizeof(user_list));
     int sid = socket(AF_INET, SOCK_STREAM, 0);
     if (sid == -1) { perror("socket"); return EXIT_FAILURE; }
@@ -83,6 +83,9 @@ int main(void) {
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(5555);
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+    int pipe_server = argv[3];
+    int pipe_client = argv[4];
 
     if (bind(sid, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == -1) {
         perror("bind"); close(sid); return EXIT_FAILURE;
