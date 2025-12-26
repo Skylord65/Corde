@@ -63,9 +63,35 @@ typedef void (*child_fn)(child_context *context);
 
 /**
  * \brief Forks plusieurs processus enfants pour exécuter des fonctions données.
+ * \param[in] error_msg Message d'erreur à afficher en cas d'échec du fork.
  * \param[in] first La première fonction enfant à exécuter.
  * \param ... Les fonctions enfants supplémentaires à exécuter, terminées par NULL. Utilise les variadic arguments.
  **/
-void forked(child_fn first, ...);
+void forked(char* error_msg, child_fn first, ...);
+
+/**
+ * \def VARIADIC_TO_ARRAY(type, array_name, count_name, first_arg)
+ * \brief Macro pour convertir des arguments variadiques en tableau.
+ * \param type Type des arguments variadiques.
+ * \param array_name Nom du tableau résultant.
+ * \param count_name Nom de la variable contenant le nombre d'arguments.
+ * \param first_arg Le premier argument variadique.
+ * \details Cette macro initialise une liste d'arguments variadiques, compte le nombre d'arguments jusqu'à NULL,
+ **/
+#define VARIADIC(type, array_name, count_name, first_arg) \
+    va_list _va_args; \
+    va_start(_va_args, first_arg); \
+    int count_name = 1; \
+    while (va_arg(_va_args, type) != NULL) { \
+        count_name++; \
+    } \
+    va_end(_va_args); \
+    type array_name[count_name]; \
+    array_name[0] = first_arg; \
+    va_start(_va_args, first_arg); \
+    for (int _va_i = 1; _va_i < count_name; _va_i++) { \
+        array_name[_va_i] = va_arg(_va_args, type); \
+    } \
+    va_end(_va_args)
 
 #endif // __UTILS_H__

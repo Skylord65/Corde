@@ -1,27 +1,11 @@
 #include "utils.h"
 
-void forked(child_fn first, ...) {
+void forked(char* error_msg, child_fn first, ...) {
     //================================================================//
     //            Variables pour les arguments variadiques            //
     //================================================================//
 
-    va_list args;
-    va_start(args, first);
-
-    int nb_children = 0;
-    while (va_arg(args, child_fn) != NULL) {
-        nb_children++;
-    }
-    va_end(args);
-    
-    child_fn functions[nb_children];
-    functions[0] = first;
-    
-    va_start(args, first);
-    for (int i = 1; i < nb_children; i++) {
-        functions[i] = va_arg(args, child_fn);
-    }
-    va_end(args);
+    VARIADIC(child_fn, functions, nb_children, first);
 
     //================================================================//
     //                              Pipes                             //
@@ -46,7 +30,7 @@ void forked(child_fn first, ...) {
         
         switch (pid) {
         case -1:
-            perror("fork failed");
+            perror(error_msg);
             exit(1);
             
         case 0:
