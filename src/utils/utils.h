@@ -66,6 +66,7 @@ typedef void (*child_fn)(child_context *context);
  * \param[in] error_msg Message d'erreur à afficher en cas d'échec du fork.
  * \param[in] first La première fonction enfant à exécuter.
  * \param ... Les fonctions enfants supplémentaires à exécuter, terminées par NULL. Utilise les variadic arguments.
+ * \warning Ne pas oublier de terminer la liste des fonctions par NULL.
  **/
 void forked(char* error_msg, child_fn first, ...);
 
