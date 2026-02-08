@@ -10,26 +10,34 @@ default:
 #================================#
 
 # Compile le test des utilitaires
-build-utils-test:
+build-utils-test: locales setup
     @echo "Compilation du test utils..."
     {{CC}} {{CFLAGS}} tests/utils_test.c src/utils/utils.c -o {{BUILD_DIR}}/utils-test
 
+build-client-test: locales setup
+    @echo "Compilation du test utils..."
+    {{CC}} {{CFLAGS}} tests/client.c src/utils/utils.c -o {{BUILD_DIR}}/client-test
+
+build-server-test: locales setup
+    @echo "Compilation du test utils..."
+    {{CC}} {{CFLAGS}} tests/client.c src/utils/utils.c -o {{BUILD_DIR}}/client-test
+
 # Compile tous les tests disponibles
-build-tests: build-utils-test
+build-tests: build-utils-test build-server-test build-client-test
     @echo "Tous les tests compilés"
 
-# Compile le client (quand il sera prêt)
-build-client:
+# Compile le client
+#build-client: locales setup
     @echo "Compilation du client..."
     {{CC}} {{CFLAGS}} tests/client.c -o {{BUILD_DIR}}/client
 
-# Compile le serveur (quand il sera prêt)
-build-server:
+# Compile le serveur
+#build-server: setup
     @echo "Compilation du serveur..."
     {{CC}} {{CFLAGS}} tests/server.c -o {{BUILD_DIR}}/server
 
 # Compile tout le projet
-build-all: setup build-tests
+build-all: setup locales build-tests 
     @echo "Projet compilé"
 
 #================================#
