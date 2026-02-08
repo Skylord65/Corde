@@ -1,24 +1,46 @@
 CC := "gcc"
 CFLAGS := "-Wall -Wextra -g"
 BUILD_DIR := "build"
+LOCALEDIR := "locale"
 
 default:
     @just --list
+
+#================================#
+#      Internationalization      #
+#================================#
+
+# Compile les fichiers .po en .mo et les nettoie du flag 'fuzzy'
+locales: extract
+    @echo "Mise à jour et compilation des fichiers de traduction..."
+    @for po_file in {{LOCALEDIR}}/*/*.po; do \
+        lang=$(basename "$po_file" .po); \
+        mkdir -p "{{LOCALEDIR}}/$lang/LC_MESSAGES"; \
+        msgmerge -U "$po_file" "{{LOCALEDIR}}/Koncord.pot"; \
+        sed -i 's/#, fuzzy//g' "$po_file"; \
+        msgfmt "$po_file" -o "{{LOCALEDIR}}/$lang/LC_MESSAGES/Koncord.mo"; \
+    done
+
+# Extrait toutes les chaînes de caractères du projet
+extract:
+    @echo "Extraction des chaînes..."
+    @mkdir -p {{LOCALEDIR}}
+    xgettext -k_ --from-code=UTF-8 -o {{LOCALEDIR}}/Koncord.pot */*.c
 
 #================================#
 #           Compilation          #
 #================================#
 
 # Compile le test des utilitaires
-build-utils-test: setup
+build-utils-test: setup locales
     @echo "Compilation du test utils..."
     {{CC}} {{CFLAGS}} tests/utils_test.c src/utils/utils.c -o {{BUILD_DIR}}/utils-test
 
-build-client-test: setup
+build-client-test: setup locales
     @echo "Compilation du test utils..."
     {{CC}} {{CFLAGS}} tests/client.c src/utils/utils.c -o {{BUILD_DIR}}/client-test
 
-build-server-test: setup
+build-server-test: setup locales
     @echo "Compilation du test utils..."
     {{CC}} {{CFLAGS}} tests/client.c src/utils/utils.c -o {{BUILD_DIR}}/client-test
 
@@ -49,8 +71,16 @@ test-utils: build-utils-test
     @echo "Exécution du test utils..."
     ./{{BUILD_DIR}}/utils-test
 
+test-client: build-client-test
+    @echo "Exécution du test utils..."
+    ./{{BUILD_DIR}}/client-test
+
+test-server: build-server-test
+    @echo "Exécution du test utils..."
+    ./{{BUILD_DIR}}/server-test
+
 # Lance tous les tests
-test: test-utils
+test: test-utils test-client test-server
     @echo "Tous les tests passés"
 
 # Lance le client
@@ -91,6 +121,7 @@ clean:
     @echo "Nettoyage..."
     rm -rf {{BUILD_DIR}}
     rm -f database.db
+    rm -rf {{LOCALEDIR}}/*/LC_MESSAGES/*.mo
     @echo "Nettoyage terminé"
 
 # Compte les lignes de code

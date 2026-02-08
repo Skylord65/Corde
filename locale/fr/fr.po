@@ -1,0 +1,81 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#  <contact@wateir.fr>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-08 15:57+0100\n"
+"PO-Revision-Date: 2026-02-08 16:26+0100\n"
+"Last-Translator:  <contact@wateir.fr>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: tests/client.c:29
+msgid "Erreur création socket"
+msgstr "Socket creation error"
+
+#: tests/client.c:32
+#, c-format
+msgid "[Client] Socket créé\n"
+msgstr "[Client] Socket created\n"
+
+#: tests/client.c:40
+msgid "Adresse invalide"
+msgstr "Invalid address"
+
+#: tests/client.c:47
+msgid "Erreur connexion au serveur"
+msgstr "Error connecting to server"
+
+#: tests/client.c:51
+#, c-format
+msgid ""
+"[Client] Connecté au serveur\n"
+"\n"
+msgstr ""
+"[Client] Connected to server\n"
+"\n"
+
+#: tests/client.c:54
+#, c-format
+msgid "Entrez votre message : "
+msgstr "Enter your message: "
+
+#: tests/client.c:59
+msgid "Erreur lecture message"
+msgstr "Error reading message"
+
+#: tests/client.c:66
+msgid "Erreur envoi"
+msgstr "Send error"
+
+#: tests/client.c:70
+#, c-format
+msgid "[Client] Message envoyé avec succès\n"
+msgstr "[Client] Message sent successfully\n"
+
+#: tests/client.c:74
+#, c-format
+msgid "[Client] Connexion fermée\n"
+msgstr "[Client] Connection closed\n"
+
+#: tests/utils_test.c:11 tests/utils_test.c:17 tests/utils_test.c:23
+#, c-format
+msgid "Début %d: tâche %d\n"
+msgstr "Start %d: task %d\n"
+
+#: tests/utils_test.c:13 tests/utils_test.c:19 tests/utils_test.c:25
+#, c-format
+msgid "Fin %d: tâche %d\n"
+msgstr "End %d: task %d\n"
+
+#: tests/utils_test.c:38
+msgid "Erreur test de fork"
+msgstr "Fork test error"

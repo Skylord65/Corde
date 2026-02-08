@@ -4,8 +4,8 @@
 #include <unistd.h>
 #include <string.h>
 
-int main(int argc, char const *argv[])
+
+int main(void)
 {
-    print("lancement de l'éxecutable\n");
     return 0;
 }

@@ -25,6 +25,9 @@ build/
 *.la
 *.lo
 
+# Translate file
+*.mo
+
 # Shared objects (inc. Windows DLLs)
 *.dll
 *.so
