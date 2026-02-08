@@ -1,3 +1,6 @@
+# Build folder
+build/
+
 # Prerequisites
 *.d
 
@@ -21,6 +24,9 @@
 *.a
 *.la
 *.lo
+
+# Translate file
+*.mo
 
 # Shared objects (inc. Windows DLLs)
 *.dll
