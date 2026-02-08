@@ -10,15 +10,15 @@ default:
 #================================#
 
 # Compile le test des utilitaires
-build-utils-test: locales setup
+build-utils-test: setup
     @echo "Compilation du test utils..."
     {{CC}} {{CFLAGS}} tests/utils_test.c src/utils/utils.c -o {{BUILD_DIR}}/utils-test
 
-build-client-test: locales setup
+build-client-test: setup
     @echo "Compilation du test utils..."
     {{CC}} {{CFLAGS}} tests/client.c src/utils/utils.c -o {{BUILD_DIR}}/client-test
 
-build-server-test: locales setup
+build-server-test: setup
     @echo "Compilation du test utils..."
     {{CC}} {{CFLAGS}} tests/client.c src/utils/utils.c -o {{BUILD_DIR}}/client-test
 
@@ -27,17 +27,17 @@ build-tests: build-utils-test build-server-test build-client-test
     @echo "Tous les tests compilés"
 
 # Compile le client
-#build-client: locales setup
-    @echo "Compilation du client..."
-    {{CC}} {{CFLAGS}} tests/client.c -o {{BUILD_DIR}}/client
+#build-client: setup
+#    @echo "Compilation du client..."
+#    {{CC}} {{CFLAGS}} tests/client.c -o {{BUILD_DIR}}/client
 
 # Compile le serveur
 #build-server: setup
-    @echo "Compilation du serveur..."
-    {{CC}} {{CFLAGS}} tests/server.c -o {{BUILD_DIR}}/server
+#    @echo "Compilation du serveur..."
+#    {{CC}} {{CFLAGS}} tests/server.c -o {{BUILD_DIR}}/server
 
 # Compile tout le projet
-build-all: setup locales build-tests 
+build-all: setup build-tests 
     @echo "Projet compilé"
 
 #================================#
@@ -54,14 +54,14 @@ test: test-utils
     @echo "Tous les tests passés"
 
 # Lance le client
-run-client: build-client
-    @echo "Lancement du client..."
-    ./{{BUILD_DIR}}/client
+# run-client: build-client
+#     @echo "Lancement du client..."
+#     ./{{BUILD_DIR}}/client
 
-# Lance le serveur
-run-server: build-server
-    @echo "Lancement du serveur..."
-    ./{{BUILD_DIR}}/server
+# # Lance le serveur
+# run-server: build-server
+#     @echo "Lancement du serveur..."
+#     ./{{BUILD_DIR}}/server
 
 #================================#
 #         Base de données        #
