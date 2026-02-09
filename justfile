@@ -2,6 +2,7 @@ CC := "gcc"
 CFLAGS := "-Wall -Wextra -g"
 BUILD_DIR := "build"
 LOCALEDIR := "locale"
+MESSAGE_TEST := "Message de test du client"
 
 default:
     @just --list
@@ -37,12 +38,12 @@ build-utils-test: setup
     {{CC}} {{CFLAGS}} tests/utils_test.c src/utils/utils.c -o {{BUILD_DIR}}/utils-test
 
 build-client-test: setup
-    @echo "Compilation du test utils..."
+    @echo "Compilation du test client..."
     {{CC}} {{CFLAGS}} tests/client.c src/utils/utils.c -o {{BUILD_DIR}}/client-test
 
 build-server-test: setup
-    @echo "Compilation du test utils..."
-    {{CC}} {{CFLAGS}} tests/client.c src/utils/utils.c -o {{BUILD_DIR}}/client-test
+    @echo "Compilation du test serveur..."
+    {{CC}} {{CFLAGS}} tests/server.c src/utils/utils.c -o {{BUILD_DIR}}/server-test
 
 # Compile tous les tests disponibles
 build-tests: build-utils-test build-server-test build-client-test
@@ -72,15 +73,20 @@ test-utils: build-utils-test
     ./{{BUILD_DIR}}/utils-test
 
 test-client: build-client-test
-    @echo "Exécution du test utils..."
+    @echo "Exécution du test client..."
     ./{{BUILD_DIR}}/client-test
 
 test-server: build-server-test
-    @echo "Exécution du test utils..."
-    ./{{BUILD_DIR}}/server-test
+    @echo "Exécution du test serveur..."
+    ./{{BUILD_DIR}}/server-test &
+    @sleep 1
+    echo "{{MESSAGE_TEST}}" | ./{{BUILD_DIR}}/client-test
+    @sleep 1
+    @kill `pgrep server-test` || true
+    @echo "Test serveur réussi fermeture. "
 
-# Lance tous les tests
-test: test-utils test-client test-server
+# Lance tous les tests sauf le client qui est testé avec le serveur
+test: test-utils test-server
     @echo "Tous les tests passés"
 
 # Lance le client
