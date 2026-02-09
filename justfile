@@ -32,15 +32,15 @@ extract:
 #================================#
 
 # Compile le test des utilitaires
-build-utils-test: setup locales
+build-utils-test: setup
     @echo "Compilation du test utils..."
     {{CC}} {{CFLAGS}} tests/utils_test.c src/utils/utils.c -o {{BUILD_DIR}}/utils-test
 
-build-client-test: setup locales
+build-client-test: setup
     @echo "Compilation du test utils..."
     {{CC}} {{CFLAGS}} tests/client.c src/utils/utils.c -o {{BUILD_DIR}}/client-test
 
-build-server-test: setup locales
+build-server-test: setup
     @echo "Compilation du test utils..."
     {{CC}} {{CFLAGS}} tests/client.c src/utils/utils.c -o {{BUILD_DIR}}/client-test
 
@@ -59,7 +59,7 @@ build-tests: build-utils-test build-server-test build-client-test
 #    {{CC}} {{CFLAGS}} tests/server.c -o {{BUILD_DIR}}/server
 
 # Compile tout le projet
-build-all: setup build-tests 
+build-all: setup build-tests
     @echo "Projet compilé"
 
 #================================#
