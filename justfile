@@ -33,20 +33,20 @@ extract:
 #================================#
 
 # Compile le test des utilitaires
-build-utils-test: setup
-    @echo "Compilation du test utils..."
-    {{CC}} {{CFLAGS}} tests/utils_test.c src/utils/utils.c -o {{BUILD_DIR}}/utils-test
+build-forked-test: setup
+    @echo "Compilation du test forked..."
+    {{CC}} {{CFLAGS}} tests/forked-test.c -o {{BUILD_DIR}}/forked-test
 
 build-client-test: setup
     @echo "Compilation du test client..."
-    {{CC}} {{CFLAGS}} tests/client.c src/utils/utils.c -o {{BUILD_DIR}}/client-test
+    {{CC}} {{CFLAGS}} tests/client.c -o {{BUILD_DIR}}/client-test
 
 build-server-test: setup
     @echo "Compilation du test serveur..."
-    {{CC}} {{CFLAGS}} tests/server.c src/utils/utils.c -o {{BUILD_DIR}}/server-test
+    {{CC}} {{CFLAGS}} tests/server.c -o {{BUILD_DIR}}/server-test
 
 # Compile tous les tests disponibles
-build-tests: build-utils-test build-server-test build-client-test
+build-tests: build-forked-test build-server-test build-client-test
     @echo "Tous les tests compilés"
 
 # Compile le client
@@ -68,9 +68,9 @@ build-all: setup build-tests
 #================================#
 
 # Lance le test des utilitaires
-test-utils: build-utils-test
-    @echo "Exécution du test utils..."
-    ./{{BUILD_DIR}}/utils-test
+test-forked: build-forked-test
+    @echo "Exécution du test forked..."
+    ./{{BUILD_DIR}}/forked-test
 
 test-client: build-client-test
     @echo "Exécution du test client..."
@@ -86,7 +86,7 @@ test-server: build-server-test
     @echo "Test serveur réussi fermeture. "
 
 # Lance tous les tests sauf le client qui est testé avec le serveur
-test: test-utils test-server
+test: test-forked test-server
     @echo "Tous les tests passés"
 
 # Lance le client

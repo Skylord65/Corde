@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <sys/wait.h>
-#include "../src/utils/utils.h"
+#include "../src/utils/forked.h"
 
 #include <libintl.h>
 #include <locale.h>
@@ -30,7 +30,7 @@ int main() {
     bindtextdomain("Koncord", "./locale");
     textdomain("Koncord");
     
-    forked(_("Erreur test de fork"), child1, child2, child3, NULL);
+    forked(_("Erreur test de fork"), child1, child2, child3);
     
     return 0;
-} 
+}

@@ -1,12 +1,85 @@
-#include "utils.h"
+#ifndef __FORKED_H__
+#define __FORKED_H__
 
-void forked(char* error_msg, child_fn first, ...) {
-    //================================================================//
-    //            Variables pour les arguments variadiques            //
-    //================================================================//
+/**
+ * \file forked.h
+ * \brief Utilitaires et macros pour la gestion des processus enfants.
+ * \author Manolo-dev
+ * \date 11/02/2026
+ * \version 0.2
+ **/
 
-    VARIADIC(child_fn, functions, nb_children, first);
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdarg.h>
+#include <stdarg.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+#include "variadic.h"
 
+/**
+ * \struct child_context
+ * \brief Contexte pour chaque processus enfant.
+ * \details Contient le contexte et les pipes.
+ * \note À utiliser dans les fonctions enfants passées à forked().
+ * \warning Ne pas modifier directement les membres de cette structure.
+ * \example |
+ * void child_function(child_context *context) {
+ *    // Utilisez context->index, context->pid, etc.
+ * }
+ **/
+typedef struct {
+    /**
+     * \brief Index du processus enfant.
+     **/
+    int index;
+    /**
+     * \brief PID du processus enfant.
+     **/
+    pid_t pid;
+    /**
+     * \brief Nombre total de processus enfants.
+     **/
+    int nb_children;
+    /**
+     * \brief Pipe de lecture pour le processus enfant.
+     **/
+    int pipe_read;
+    /**
+     * \brief Pipe d'écriture pour le processus enfant.
+     **/
+    int pipe_write;
+    /**
+     * \brief Tableau des pipes pour tous les processus enfants.
+     **/
+    int *all_pipes;
+} child_context;
+
+/**
+ * \def child_fn
+ * \brief Type de fonction pour les processus enfants.
+ **/
+typedef void (*child_fn)(child_context *context);
+
+/**
+ * \def Macro appellant l'implémentation forked_impl en utilisant les macros pour compter le nombre d'argument et gérer une variadique.
+ **/
+#define forked(error_msg, ...) \
+    forked_impl(error_msg, COUNT_ARGS(__VA_ARGS__), (child_fn[]){__VA_ARGS__})
+
+/**
+ * \brief Forks plusieurs processus enfants pour exécuter des fonctions données.
+ * \param[in] error_msg Message d'erreur à afficher en cas d'échec du fork.
+ * \param[in] nb_children Nombre de processus enfants à créer.
+ * \param[in] functions Tableau de fonctions à exécuter dans les processus enfants.
+ * \warning Il est impossible de donner plus de 10 arguments.
+ * \details |
+    Cette fonction crée nb_children processus enfants, chacun exécutant la fonction correspondante
+    dans le tableau functions. Chaque processus enfant reçoit un contexte contenant son index, son PID,
+    le nombre total de processus enfants, et les pipes pour communiquer avec les autres processus.
+ **/
+static inline void forked_impl(char* error_msg, int nb_children, child_fn functions[]) {
     //================================================================//
     //                              Pipes                             //
     //================================================================//
@@ -92,3 +165,5 @@ void forked(char* error_msg, child_fn first, ...) {
         waitpid(child_pids[i], &status, 0);
     }
 }
+
+#endif // __FORKED_H__
