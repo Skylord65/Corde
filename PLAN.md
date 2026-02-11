@@ -301,6 +301,12 @@ TEST_7 o--o P8
 
 Personne n'est responsable ici, vive l'anarchie !
 
+## Journalisation
+
+Toutes les modifications du code doivent être documentées dans un journal de bord [CHANGELOG.md](CHANGELOG.md) avec une description claire des changements, des raisons et des impacts potentiels. Les entrées doivent suivre le format suivant : `"### " <date_value> " - " <author>`
+
+Une fois une version finie, une section `"## " <version> " - " <date_value>` doit être créée avec un résumé des changements majeurs et mineurs, les fonctionnalités ajoutées, les bugs corrigés, les problèmes connus et les notes de version.
+
 ## Format des identifiants
 
 ### Nommage des fichiers
