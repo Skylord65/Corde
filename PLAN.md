@@ -307,6 +307,8 @@ Toutes les modifications du code doivent être documentées dans un journal de b
 
 Une fois une version finie, une section `"## " <version> " - " <date_value>` doit être créée avec un résumé des changements majeurs et mineurs, les fonctionnalités ajoutées, les bugs corrigés, les problèmes connus et les notes de version.
 
+Toutes les réunions - physiques ou virtuelles - doivent être documentées dans le journal par une entrée de la forme `"### RÉUNION " <date_value> " - " <subject>`. L'ordre du jour doit figurer à la première ligne, et la conclusion de la réunion doit être claire.
+
 ## Format des identifiants
 
 ### Nommage des fichiers
