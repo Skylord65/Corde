@@ -22,3 +22,11 @@ Le prix du nom de domaine n'est pas immédiatement problématique (nous pouvons 
 
 **Aucune décision définitive, mais _"reto"_ semble plaire à SL, et MD.**
 **En attente d'une prochaine réunion pour clarifier les nouvelles décisions avec WT.**
+
+### 23/02/2026 - Skylord65
+
+Nouvelles propositions de nouveau nom de la future plateforme :
+- _"Interreto"_ : traduction littérale de _"inter réseaux"_ en Espéranto, pour le moment il fait parti des idées promettantes.
+- _"Linja"_ : traduction de _"câble/connection"_ en Espéranto, idée la plus convaincante car nom de domaine disponible
+
+**Aucune décision n'a été prise pour le moment seulement un partage d'idée.**
