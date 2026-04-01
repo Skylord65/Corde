@@ -1,4 +1,4 @@
-# Cord
+# Corde
 
 Corde est une application de messagerie instantanée multiplateforme inspirée de Discord, développée en C. Elle offre une communication sécurisée et riche en fonctionnalités pour les utilisateurs sur Linux, Windows et d'autres systèmes d'exploitation.
 
