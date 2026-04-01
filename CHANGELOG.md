@@ -30,3 +30,9 @@ Nouvelles propositions de nouveau nom de la future plateforme :
 - _"Linja"_ : traduction de _"câble/connection"_ en Espéranto, idée la plus convaincante car nom de domaine disponible
 
 **Aucune décision n'a été prise pour le moment seulement un partage d'idée.**
+
+### 01/04/2026 - Skylord65
+
+Prise de décision, changement de nom de 'Koncord' pour 'Corde'. Décision prise par MD et SL.
+
+Changement de toutes les itérations de 'Koncord' en 'Corde' au sein du dépot. 
