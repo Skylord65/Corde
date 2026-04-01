@@ -20,8 +20,8 @@ int main() {
     char message[BUFFER_SIZE];
     setlocale(LC_ALL, "");
 
-    bindtextdomain("Koncord", "./locale");
-    textdomain("Koncord");
+    bindtextdomain("Corde", "./locale");
+    textdomain("Corde");
     
     // 1. Créer le socket
     client_fd = socket(AF_INET, SOCK_STREAM, 0);

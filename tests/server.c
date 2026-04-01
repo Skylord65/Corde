@@ -25,8 +25,8 @@ int main(void)
     int opt = 1;
 
     setlocale(LC_ALL, "");
-    bindtextdomain("Koncord", "./locale");
-    textdomain("Koncord");
+    bindtextdomain("Corde", "./locale");
+    textdomain("Corde");
     
     // 1. Créer le socket
     server_fd = socket(AF_INET, SOCK_STREAM, 0);

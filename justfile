@@ -17,16 +17,16 @@ locales: extract
     @for po_file in {{LOCALEDIR}}/*/*.po; do \
         lang=$(basename "$po_file" .po); \
         mkdir -p "{{LOCALEDIR}}/$lang/LC_MESSAGES"; \
-        msgmerge -U "$po_file" "{{LOCALEDIR}}/Koncord.pot"; \
+        msgmerge -U "$po_file" "{{LOCALEDIR}}/Corde.pot"; \
         sed -i 's/#, fuzzy//g' "$po_file"; \
-        msgfmt "$po_file" -o "{{LOCALEDIR}}/$lang/LC_MESSAGES/Koncord.mo"; \
+        msgfmt "$po_file" -o "{{LOCALEDIR}}/$lang/LC_MESSAGES/Corde.mo"; \
     done
 
 # Extrait toutes les chaînes de caractères du projet
 extract:
     @echo "Extraction des chaînes..."
     @mkdir -p {{LOCALEDIR}}
-    xgettext -k_ --from-code=UTF-8 -o {{LOCALEDIR}}/Koncord.pot */*.c
+    xgettext -k_ --from-code=UTF-8 -o {{LOCALEDIR}}/Corde.pot */*.c
 
 #================================#
 #           Compilation          #

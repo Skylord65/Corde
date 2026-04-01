@@ -3,7 +3,7 @@
 ## Contribution
 
 Le texte étant en francais, pour generer les fichiers `.pot` il faut utiliser l'encodage en UTF-8   
-Exemple : `xgettext -k_ --from-code=UTF-8 -o local/Koncord.pot tests/client.c`
+Exemple : `xgettext -k_ --from-code=UTF-8 -o local/Corde.pot tests/client.c`
 
 Compiler la traduction :
 ```sh

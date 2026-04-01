@@ -27,8 +27,8 @@ void child3(child_context *ctx) {
 
 int main() {
     setlocale(LC_ALL, "");
-    bindtextdomain("Koncord", "./locale");
-    textdomain("Koncord");
+    bindtextdomain("Corde", "./locale");
+    textdomain("Corde");
     
     forked(_("Erreur test de fork"), child1, child2, child3);
     
