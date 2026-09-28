@@ -36,3 +36,7 @@ Nouvelles propositions de nouveau nom de la future plateforme :
 Prise de décision, changement de nom de 'Koncord' pour 'Corde'. Décision prise par MD et SL.
 
 Changement de toutes les itérations de 'Koncord' en 'Corde' au sein du dépot. 
+
+### 25/09/2026 - Skylord65
+
+Ajout de GreenSky (GS) dans les contributeurs du projet.
